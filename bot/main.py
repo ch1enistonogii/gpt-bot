@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import app_commands
 import openai
 
-DISCORD_TOKEN = 'MTI1MTU3NDk0MzU5MDkxMjA1Mg.GOkkvT.GbGafy_TvTNN7NmGIci9-ltjbCn3g3rG3EDU8Q'
+DISCORD_TOKEN = 'MTI1OTIzNTA4Mzc1MjMwODgwNw.GesFxJ.RA6cnRR5wNMBhRAq0oE6Qu8Icos63ru_0OeqpE'
 OPENAI_API_KEY = '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'
 
 openai.api_key = OPENAI_API_KEY
