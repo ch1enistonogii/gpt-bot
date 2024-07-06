@@ -1,10 +1,14 @@
 import discord
 from discord.ext import commands
-from discord import app_commands
 import openai
+from dotenv import load_dotenv
+import os
 
-DISCORD_TOKEN = 'MTI1OTIzNTA4Mzc1MjMwODgwNw.GesFxJ.RA6cnRR5wNMBhRAq0oE6Qu8Icos63ru_0OeqpE'
-OPENAI_API_KEY = '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'
+# Load environment variables from .env file
+load_dotenv()
+
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 openai.api_key = OPENAI_API_KEY
 
@@ -17,6 +21,13 @@ class ChatGPTClient(commands.Cog):
         self.user_1_last_response = None
         self.user_2_last_message = None
         self.user_2_last_response = None
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        channel = member.guild.system_channel
+        if channel is not None:
+            await channel.send(f'Welcome {member.mention}.')
+            await channel.send("https://images-ext-1.discordapp.net/external/HcfEIxo_k3CtpeP8fVQOImxievqQC_dfCZ2MtTtM1BE/https/media.tenor.com/w78adlWSxnkAAAPo/why-recycle-bin.mp4")
 
     def generate_gpt3_response(self, prompt, history):
         response = openai.ChatCompletion.create(
@@ -32,7 +43,7 @@ class ChatGPTClient(commands.Cog):
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": f'Ответ на русском. {history} '},
+                {"role": "system", "content": f'Ответ на русском. {history}'},
                 {"role": "user", "content": f'Текущий запрос: {prompt}; Текущий ответ: '},
             ],
         )
