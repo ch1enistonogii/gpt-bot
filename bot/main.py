@@ -62,7 +62,7 @@ class ChatGPTClient(commands.Cog):
                 response_chunks = self.split_message(gpt_response)
                 for chunk in response_chunks:
                     await message.channel.send(f'{chunk}')
-                print(f"User {message.author} used the command")
+                print(f"Admin User {message.author} used the command. Message: {user_prompt}")
                 self.user_1_last_message = user_prompt
                 self.user_1_last_response = gpt_response
 
@@ -73,7 +73,7 @@ class ChatGPTClient(commands.Cog):
                 response_chunks = self.split_message(gpt_response)
                 for chunk in response_chunks:
                     await message.channel.send(f'{chunk}')
-                print(f"User {message.author} used the command")
+                print(f"Admin User {message.author} used the command. Message: {user_prompt}")
                 self.user_2_last_message = user_prompt
                 self.user_2_last_response = gpt_response
 
@@ -82,7 +82,7 @@ class ChatGPTClient(commands.Cog):
                 user_history = f"Предыдущий запрос: {self.last_gpt3_prompt} Предыдущий ответ: {self.last_gpt3_response}"
                 gpt_response = self.generate_gpt3_response(user_prompt, user_history)
                 await message.reply(f'{gpt_response}')
-                print(f"User {message.author} used the command")
+                print(f"User {message.author} used the command. Message: {user_prompt}")
                 self.last_gpt3_prompt = user_prompt
                 self.last_gpt3_response = gpt_response
 
